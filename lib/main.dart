@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'screens/login_screen.dart';
+import 'screens/profile_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -20,7 +20,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen(), // Ana ekranı LoginScreen olarak değiştirin
+      home: LoginScreen(), // Ana ekran LoginScreen olarak ayarlandı
+      routes: {
+        '/profile': (context) => ProfileScreen(), // Profile rotası tanımlandı
+      },
     );
   }
 }
