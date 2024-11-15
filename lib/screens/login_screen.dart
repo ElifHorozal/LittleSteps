@@ -46,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
 
     // Başarılı girişten sonra ProfileScreen'e yönlendirme (örneğin)
-      Navigator.pushReplacementNamed(context, '/profile');
+      Navigator.pushReplacementNamed(context, '/home');
       
   } on FirebaseAuthException catch (e) {
     String errorMessage;

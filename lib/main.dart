@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'screens/home_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/profile_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
       home: LoginScreen(), // Ana ekran LoginScreen olarak ayarlandı
       routes: {
         '/profile': (context) => ProfileScreen(), // Profile rotası tanımlandı
+        '/home':  (context) => HomeScreen(),
       },
     );
   }
