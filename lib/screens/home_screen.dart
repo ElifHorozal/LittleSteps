@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
+import 'package:little_steps/compotents/nav_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -34,7 +35,11 @@ class _HomeScreenState extends State<HomeScreen> {
         'createdAt': FieldValue.serverTimestamp(),
         'weeklyProgress': List.generate(7, (_) => false),
       };
-      await _firestore.collection('users').doc(user.uid).collection('habits').add(habit);
+      await _firestore
+          .collection('users')
+          .doc(user.uid)
+          .collection('habits')
+          .add(habit);
     }
   }
 
@@ -49,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final user = _auth.currentUser;
 
     return Scaffold(
+      drawer: NavDrawer(),
       appBar: AppBar(
         title: Text('Alışkanlıklarım'),
       ),
@@ -95,10 +101,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: List.generate(7, (dayIndex) {
                             final now = DateTime.now();
-                            final startOfWeek = now.subtract(Duration(days: now.weekday - 1));
-                            final dayDate = startOfWeek.add(Duration(days: dayIndex));
-                            final dayName = DateFormat.E().format(dayDate); // Günün kısa adı (Mon, Tue, ...)
-                            final isToday = dayIndex == (now.weekday - 1); // Bugün kontrolü
+                            final startOfWeek =
+                                now.subtract(Duration(days: now.weekday - 1));
+                            final dayDate =
+                                startOfWeek.add(Duration(days: dayIndex));
+                            final dayName = DateFormat.E().format(
+                                dayDate); // Günün kısa adı (Mon, Tue, ...)
+                            final isToday =
+                                dayIndex == (now.weekday - 1); // Bugün kontrolü
 
                             return Column(
                               mainAxisSize: MainAxisSize.min,
@@ -106,7 +116,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Text(
                                   dayName,
                                   style: TextStyle(
-                                    fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
+                                    fontWeight: isToday
+                                        ? FontWeight.bold
+                                        : FontWeight.normal,
                                     color: isToday ? Colors.blue : Colors.black,
                                   ),
                                 ),
@@ -121,7 +133,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         .doc(user.uid)
                                         .collection('habits')
                                         .doc(habit.id)
-                                        .update({'weeklyProgress': weeklyProgress});
+                                        .update(
+                                            {'weeklyProgress': weeklyProgress});
                                   },
                                 ),
                               ],

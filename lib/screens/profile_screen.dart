@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:little_steps/compotents/nav_drawer.dart';
 import 'profile_update_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -25,7 +26,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Future<void> _loadUserData() async {
     user = _auth.currentUser;
     if (user != null) {
-      DocumentSnapshot doc = await _firestore.collection('users').doc(user!.uid).get();
+      DocumentSnapshot doc =
+          await _firestore.collection('users').doc(user!.uid).get();
       setState(() {
         userData = doc.data() as Map<String, dynamic>?;
       });
@@ -35,6 +37,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: NavDrawer(),
       appBar: AppBar(
         title: Text("Profilim"),
         actions: [
@@ -60,14 +63,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   SizedBox(height: 16),
                   _buildProfileItem("Ad", userData!['name'] ?? "Bilinmiyor"),
-                  _buildProfileItem("E-posta", userData!['email'] ?? "Bilinmiyor"),
+                  _buildProfileItem(
+                      "E-posta", userData!['email'] ?? "Bilinmiyor"),
                   SizedBox(height: 24),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ProfileUpdateScreen()),
-                        );
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ProfileUpdateScreen()),
+                      );
                     },
                     child: Text("Profili Güncelle"),
                   )
