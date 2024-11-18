@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:little_steps/screens/achievement_screen.dart';
 import 'package:little_steps/screens/home_screen.dart';
 import 'package:little_steps/screens/profile_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 class NavDrawer extends StatelessWidget {
   @override
@@ -54,7 +56,13 @@ class NavDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.exit_to_app),
             title: Text('Logout'),
-            onTap: () => {},
+            onTap: () async {
+              // Firebase oturumunu kapat
+              await FirebaseAuth.instance.signOut();
+
+              // Giriş ekranına yönlendir
+              Navigator.pushReplacementNamed(context, '/login');
+            },
           ),
         ],
       ),
