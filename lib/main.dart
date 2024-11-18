@@ -4,6 +4,7 @@ import 'screens/login_screen.dart';
 import 'screens/profile_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'screens/achievement_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginScreen(),
         '/profile': (context) => ProfileScreen(), // Profile rotası tanımlandı
         '/home':  (context) => HomeScreen(),
+        '/achievements': (context) => AchievementScreen(),
       },
     );
   }

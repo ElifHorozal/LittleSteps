@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:little_steps/compotents/nav_drawer.dart';
+import 'package:little_steps/components/nav_drawer.dart';
 import 'profile_update_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
