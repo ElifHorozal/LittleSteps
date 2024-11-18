@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
       ),
       home: LoginScreen(), // Ana ekran LoginScreen olarak ayarlandı
       routes: {
+        '/login': (context) => LoginScreen(),
         '/profile': (context) => ProfileScreen(), // Profile rotası tanımlandı
         '/home':  (context) => HomeScreen(),
       },
