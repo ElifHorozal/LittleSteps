@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:little_steps/screens/achievement_screen.dart';
 import 'package:little_steps/screens/home_screen.dart';
 import 'package:little_steps/screens/profile_screen.dart';
 
@@ -38,6 +39,15 @@ class NavDrawer extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => HomeScreen()),
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.settings),
+            title: Text('Achivements'),
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => AchievementScreen()),
               );
             },
           ),
