@@ -4,7 +4,6 @@ import 'package:little_steps/screens/home_screen.dart';
 import 'package:little_steps/screens/profile_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-
 class NavDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -30,27 +29,24 @@ class NavDrawer extends StatelessWidget {
             leading: Icon(Icons.verified_user),
             title: Text('Profile'),
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => ProfileScreen()),
-              );
+              // Profil ekranına yönlendir
+              Navigator.pushReplacementNamed(context, '/profile');
             },
           ),
           ListTile(
             leading: Icon(Icons.settings),
             title: Text('Home'),
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => HomeScreen()),
-              );
+              // Ana ekrana yönlendir
+              Navigator.pushReplacementNamed(context, '/home');
             },
           ),
           ListTile(
             leading: Icon(Icons.settings),
-            title: Text('Achivements'),
+            title: Text('Achievements'),
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => AchievementScreen()),
-              );
+              // Başarılar ekranına yönlendir
+              Navigator.pushReplacementNamed(context, '/achievements');
             },
           ),
           ListTile(
