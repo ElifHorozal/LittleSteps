@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:little_steps/screens/achievement_screen.dart';
-import 'package:little_steps/screens/home_screen.dart';
-import 'package:little_steps/screens/profile_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class NavDrawer extends StatelessWidget {

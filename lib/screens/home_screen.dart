@@ -28,24 +28,26 @@ class _HomeScreenState extends State<HomeScreen> {
   return date.subtract(Duration(days: date.weekday - 1));
   }
 
-  Future<void> _addHabit(String habitName, String chartType) async {
-  final user = _auth.currentUser;
+  Future<void> _addHabit(String habitName, String chartType, Color customColor) async {
+  final user = FirebaseAuth.instance.currentUser;
   if (user != null) {
     final today = DateTime.now();
-    final weekStart = getStartOfWeek(today); // Haftanın Pazartesi'sini hesapla
+    final weekStart = today.subtract(Duration(days: today.weekday - 1));
 
-    // Alışkanlık oluştur
     final habit = {
       'name': habitName,
-      'chartType': chartType, // Grafik türü
+      'chartType': chartType,
       'createdAt': FieldValue.serverTimestamp(),
-      'weeklyProgress': List<bool>.generate(7, (_) => false), // Haftalık ilerleme başlangıcı
-      'currentWeekStart': DateFormat('yyyy-MM-dd').format(weekStart), // Haftanın başlangıç tarihi
-      'isCompleted': false , 
+      'weeklyProgress': List<bool>.generate(7, (_) => false),
+      'currentWeekStart': DateFormat('yyyy-MM-dd').format(weekStart),
+      'color': {
+        'red': customColor.red,
+        'green': customColor.green,
+        'blue': customColor.blue,
+      }, // Renk bilgisi kaydediliyor
     };
 
-    // Firestore'a alışkanlığı ekle
-    await _firestore
+    await FirebaseFirestore.instance
         .collection('users')
         .doc(user.uid)
         .collection('habits')
@@ -169,7 +171,11 @@ Future<void> _checkAndResetWeeklyProgress(String habitId) async {
                     final String chartType = data['chartType'] ?? 'Bar Chart';
                     final List<bool> weeklyProgress =
                         List<bool>.from(data['weeklyProgress']);
-
+                    final Map<String, int> colorMap = {
+                        'red': data['color']['red'] ?? 0,
+                        'green': data['color']['green'] ?? 0,
+                        'blue': data['color']['blue'] ?? 0,
+                      };
                     final today = DateTime.now();
                     final currentDayIndex = today.weekday - 1;
 
@@ -183,6 +189,7 @@ Future<void> _checkAndResetWeeklyProgress(String habitId) async {
                             subtitle: HabitProgressChart(
                               chartType: chartType,
                               weeklyProgress: weeklyProgress,
+                              colors : colorMap,
                             ),
                           ),
                           Padding(
